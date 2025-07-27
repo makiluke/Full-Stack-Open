@@ -1,36 +1,21 @@
-import {type JSX, type MouseEventHandler, useState} from 'react'
+import "react"
+import {useState} from "react"
 
-
-const Display = (props: { counter: number }) => {
-    const counter = props.counter
-    return (
-        <div>{counter}</div>
-    )
-}
-
-
-
-const Button = (props: { onClick: MouseEventHandler<HTMLButtonElement>, text: string }): JSX.Element => {
-    const {onClick, text} = props
-    return <button onClick={onClick}>{text}</button>
-}
 const App = () => {
+    const [left, setLeft] = useState(0);
+    const [right, setRight] = useState(0);
 
-    const [ counter, setCounter ] = useState(1)
-    const handleClick = () => {setCounter(counter + 1)}
-    const resetCounter = () => {setCounter(0)}
-    const squareCounter = () => {setCounter(counter**2)}
-    const squareRoot = () => {setCounter(counter**0.5)}
-
-    return (
-        <div>
-            <Display counter={counter}/>
-            <Button onClick={handleClick} text={"+"}/>
-            <Button onClick={squareCounter} text={"x²"}/>
-            <Button onClick={squareRoot} text = {"√"}/>
-            <Button onClick={resetCounter} text={"↺"}/>
-        </div>
+    return(
+    <div>
+        <button onClick={() => setLeft(left+1)}>
+            {left}
+        </button>
+        <button onClick={() => setRight(right+1)}>
+            {right}
+        </button>
+    </div>
     )
 }
+
 
 export default App
