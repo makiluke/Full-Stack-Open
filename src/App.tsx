@@ -1,19 +1,33 @@
-import {useState} from "react";
+import {useState, type JSXElementConstructor,
+    type MouseEventHandler,
+    type ReactElement,
+    type ReactNode,
+    type ReactPortal,
+    type SetStateAction
+} from "react";
 
+
+const Button = (props: { onClick: MouseEventHandler<HTMLButtonElement>; text: string}) => (
+    <button onClick={props.onClick}>{props.text}</button>
+)
+
+const Display = (props: {value: number}) => (
+    <div>{props.value}</div>
+)
 
 const App = () => {
     const [value, setValue] = useState(10);
-    const setToValue = (newValue) => () =>{
+    const setToValue = (newValue: SetStateAction<number>)  =>{
         console.log("value", newValue);
         setValue(newValue)
     }
 
     return (
         <div>
-            {value}
-            <button onClick={setToValue(1000)}>thousand</button>
-            <button onClick={setToValue(0)}>reset</button>
-            <button onClick={setToValue(value+1)}>increment</button>
+            <Display value={value}/>
+            <Button onClick={() => setToValue(1000)} text = "thousand"/>
+            <Button onClick={() => setToValue(0)} text = "reset"/>
+            <Button onClick={() => setToValue(value+1)} text = "increment"/>
         </div>
     )
 }
