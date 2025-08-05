@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "math": "^0.0.3",
+    "math.js": "^1.1.46",
+    "mathjs": "^14.6.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
