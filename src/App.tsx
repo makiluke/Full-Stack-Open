@@ -1,4 +1,31 @@
 import { useState } from 'react'
+import {forEach} from "mathjs";
+import type { JSX } from 'react/jsx-runtime';
+
+
+const Person = (props: { name: string, number: string}) => {
+    return <li>{props.name} {props.number}</li>
+}
+
+
+const Persons = (
+    props: { persons: any, filter: string }
+) => {
+    const personsToShow =
+        props.persons.filter(
+            person => person.name.toLowerCase().includes(
+                props.filter.toLowerCase())
+        );
+    return (
+        <ul>
+            {personsToShow.map(
+                (person: { name: string; number:any }) => (
+            <Person key={person.name} name={person.name} number={person.number}/>
+            ))
+            }
+        </ul>
+    );
+};
 
 const App = () => {
     const [persons, setPersons] = useState([
@@ -14,8 +41,6 @@ const App = () => {
     const [newNumber, setNewNumber] = useState('Number')
     const [filter, setFilter] = useState('All')
 
-    const personsToShow = (filter === 'All')
-    ? persons : persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
 
     const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log(event.target.value)
@@ -60,9 +85,7 @@ const App = () => {
                 <button type="submit">add</button>
             </form>
             <h2>Numbers</h2>
-            <ul>
-                {personsToShow.map((person) => (<li>{person.name} {person.number}</li>))}
-            </ul>
+            <Persons persons={persons} filter={filter} />
         </div>
     )
 }
